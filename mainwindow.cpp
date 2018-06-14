@@ -74,7 +74,7 @@ void MainWindow::on_pushButton_clicked()
 
     for(int i = setText.size(); i >= 0; i--){
        text_final += setText[i];
-    }// присвоюємо шукані речення в строку яка буде виводитись та зберігати всі попередні речення
+    }// присвоюємо шукані перевернуті (згідно з завданням) речення в строку яка буде виводитись та зберігати всі попередні речення
 
 
     query.prepare("INSERT INTO  mydb (text_value) VALUES(?)");
