@@ -56,31 +56,28 @@ void MainWindow::on_pushButton_clicked()
     data = file.readAll();
         qDebug() << QString(data);
 
-    QString search = ui->lineEdit->text();
+    QString search = ui->lineEdit->text();//шукане слово = слово з lineEdit
 
     QStringList lst = QString(data).replace(QRegExp("(\\.)"), ",")
-                                     .split(",", QString::SkipEmptyParts);
+                                     .split(",", QString::SkipEmptyParts);//розбиваємо на строки
     QString arr[999];
 
     for(int i = 0; i < lst.size(); i++){
        arr[i] = lst.at(i);
-       qDebug() << arr[i];
-    }
+    }//розбиті строки записуємо в масив
 
     for(int i = 0; i < lst.size(); i++){
        if(arr[i].contains(search)){
        setText += arr[i];
-       qDebug() << arr[i];
        }
-    }
-
-    QString text_final;
+    }//вибираємо речення з словами які шукаємо
 
     for(int i = setText.size(); i >= 0; i--){
        text_final += setText[i];
-    }
+    }// присвоюємо шукані речення в строку яка буде виводитись та зберігати всі попередні речення
 
-    query.prepare("INSERT INTO  text (text_value) VALUES(?)");
+
+    query.prepare("INSERT INTO  mydb (text_value) VALUES(?)");
 
     for(int i = 0; i <= text_final.size(); i++){
        query.addBindValue(text_final);
